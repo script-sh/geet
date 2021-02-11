@@ -1,0 +1,20 @@
+version: '3.7'
+services:
+    geet:
+        image: 'gitlab/gitlab-ce'
+        restart: always
+        container_name: geet
+        hostname: 'geet.mejik.id'
+        environment:
+          GITLAB_OMNIBUS_CONFIG: |
+            external_url 'http://10.10.25.35'
+            gitlab_rails['gitlab_shell_ssh_port'] = 2224
+        ports:
+        - '80:80'
+        - '2224:22'
+        - '443:443'        
+        volumes:
+        - '/srv/gitlab/config:/etc/gitlab'
+        - '/srv/gitlab/logs:/var/log/gitlab'
+        - '/srv/gitlab/data:/var/opt/gitlab'
+        # - '/home/samdon/.ssh:/root/.ssh'
